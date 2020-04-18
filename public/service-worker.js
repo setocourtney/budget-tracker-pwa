@@ -1,10 +1,17 @@
-const FILES_TO_CACHE = ["/", "/index.html", "app.js", "favicon.ico"];
+const FILES_TO_CACHE = [
+  "/",
+  "/index.html",
+  "/index.js",
+  '/manifest.webmanifest', 
+  "/icons/icon-192x192.png", 
+  "/icons/icon-512x512.png"
+];
 
-const CACHE_NAME = "static-cache-v2";
-const DATA_CACHE_NAME = "data-cache-v1";
+const CACHE_NAME = "budget-static-cache";
+const DATA_CACHE_NAME = "budget-data-cache";
 
 // install
-self.addEventListener("install", function(evt) {
+self.addEventListener('install', function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
@@ -52,6 +59,14 @@ self.addEventListener("fetch", function(evt) {
             return cache.match(evt.request);
           });
       }).catch(err => console.log(err))
+    );
+
+    evt.respondWith(
+      caches.open(CACHE_NAME).then(cache => {
+        return cache.match(evt.request).then(response => {
+          return response || fetch(evt.request);
+        });
+      })
     );
 
     return;
