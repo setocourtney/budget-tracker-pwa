@@ -1,5 +1,7 @@
 let transactions = [];
 let myChart;
+import { checkForIndexedDb, useIndexedDb } from "./indexedDb.js";
+
 
 fetch("/api/transaction")
   .then(response => {
@@ -136,7 +138,12 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    saveRecord(transaction);
+    if (checkForIndexedDb) {
+      useIndexedDb("offlineDb", "offlineTransactions", "put", transaction)
+      .then((res) => {
+        console.log(res);
+      });
+    }
 
     // clear form
     nameEl.value = "";

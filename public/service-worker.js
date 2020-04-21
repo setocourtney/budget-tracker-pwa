@@ -1,17 +1,19 @@
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
-  "/index.js",
-  '/manifest.webmanifest', 
-  "/icons/icon-192x192.png", 
-  "/icons/icon-512x512.png"
+  "/assets/css/styles.css",
+  "/dist/app.bundle.js",
+  "/dist/icon_192x192.png",
+  "/dist/icon_512x512.png",
+  '/dist/manifest.json'
 ];
 
-const CACHE_NAME = "budget-static-cache";
-const DATA_CACHE_NAME = "budget-data-cache";
+const CACHE_NAME = "static-cache-v1";
+const DATA_CACHE_NAME = "data-cache-v1"
+importScripts("./dist/indexedDb.bundle.js");
 
 // install
-self.addEventListener('install', function(evt) {
+self.addEventListener("install", function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log("Your files were pre-cached successfully!");
@@ -61,13 +63,49 @@ self.addEventListener("fetch", function(evt) {
       }).catch(err => console.log(err))
     );
 
-    evt.respondWith(
-      caches.open(CACHE_NAME).then(cache => {
-        return cache.match(evt.request).then(response => {
-          return response || fetch(evt.request);
-        });
+    return;
+  }
+
+  evt.respondWith(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(evt.request).then(response => {
+        return response || fetch(evt.request);
+      });
+    })
+  );
+});
+
+//post transactions when back online
+self.addEventListener('sync', function(evt) {
+  if (evt.tag === "post-offline-transactions") {
+    evt.waitUntil(
+      idb.useIndexedDb("offlineDb", "offlineTransactions", "get")
+      .then(transactions => {
+        fetch("/api/transaction/bulk", {
+          method: "POST",
+          body: JSON.stringify(transactions),
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          idb.useIndexedDb("offlineDb", "offlineTransactions", "clear")
+          .then(() => {
+            console.log("offlineTransactionshas been cleared");
+          })
+          .catch((err) => {
+            console.error(`Problem with clearing offlineTransactions ${err}`);
+          })
+        })
+      })
+      .catch((err) => {
+        console.error(`Problem with posting offlineTransactions to MongoDB ${err}`);
       })
     );
-
-    return;
-}});
+  }
+});

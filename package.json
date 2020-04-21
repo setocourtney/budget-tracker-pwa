@@ -1,12 +1,11 @@
 {
-  "name": "budget-app",
+  "name": "budget-tracker-pwa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Budget Tracker Progressive Web App - The user can add expenses and deposits to their budget with or without a connection. When entering transactions offline, the total will be populated when brought back online.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "lite-server": "lite-server"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,10 @@
     "lite-server": "^2.5.3",
     "mongoose": "^5.5.15",
     "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-pwa-manifest": "^4.2.0"
   }
 }
