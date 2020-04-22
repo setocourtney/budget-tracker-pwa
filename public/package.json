@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --watch",
-    "prestart": "npm run webpack"
+    "heroku-postbuild": "webpack -p",
+    "build": "webpack --watch"
   },
   "author": "",
   "license": "ISC",

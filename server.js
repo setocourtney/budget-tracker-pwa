@@ -27,6 +27,7 @@ app.use(require("./routes/api.js"));
 
 //return index.html
 app.get("*", (req, res) => {
+  console.log(__dirname);
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
