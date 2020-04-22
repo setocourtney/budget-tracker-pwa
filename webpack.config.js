@@ -3,11 +3,11 @@ const path = require("path");
 
 const config = {
   entry: {
-    app: "./assets/js/index.js",
-    indexedDb: "./assets/js/indexedDb.js"
+    app: "./public/assets/js/index.js",
+    indexedDb: "./public/assets/js/indexedDb.js"
   },
   output: {
-    path: __dirname + "/dist",
+    path: __dirname + "/public/dist",
     filename: "[name].bundle.js"
   },
   mode: "production",  
@@ -39,10 +39,7 @@ const config = {
       display: "standalone",
       icons: [
         {
-          src: path.resolve(
-            __dirname,
-            "assets/icons/icon_192x192.png"
-            ),
+          src: path.resolve("./public/assets/icons/icon_192x192.png"),
           size: [192, 512]
         }
       ]
