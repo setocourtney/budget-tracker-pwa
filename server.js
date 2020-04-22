@@ -25,7 +25,7 @@ mongoose.connect(MONGODB_URI, {
 app.use(require("./routes/api.js"));
 
 //return index.html
-app.get("/", (req, res) => {
+app.get(__dirname + "/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
