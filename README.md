@@ -14,4 +14,8 @@ When brought back online:
 
   * Offline entries should be added to tracker.
 
-## Directory
+## Development
+
+* MongoDB - primary database
+* IndexedDB - offline database
+* Webpack
