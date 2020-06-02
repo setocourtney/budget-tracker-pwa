@@ -34,18 +34,18 @@ Deployed to Heroku: https://budget-progressive-web-app.herokuapp.com/
 
 ### FrontEnd
 
-* Chart.js
-* Bootstrap CSS Framework
+* [Chart.js](https://www.chartjs.org/)
+* [Bootstrap](https://getbootstrap.com/)
 * HTML
 * JavaScript
 
 ### Backend
 
-* Node.js
-* Express
-* MongoDB - primary database
-* IndexedDB - offline database
-* Webpack
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/) - primary database
+* [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - offline database
+* [Webpack](https://webpack.js.org/)
 
 
 
