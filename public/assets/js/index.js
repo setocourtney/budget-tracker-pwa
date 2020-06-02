@@ -151,10 +151,27 @@ function sendTransaction(isAdding) {
   });
 }
 
+function clearBudget() {
+  fetch("/api/transaction",{
+    method: "DELETE"
+  })
+  .then(data => {
+    transactions = [];
+
+    populateTotal();
+    populateTable();
+    populateChart();
+  });
+}
+
 document.querySelector("#add-btn").onclick = function() {
   sendTransaction(true);
 };
 
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
+};
+
+document.querySelector("#clr-btn").onclick = function() {
+  clearBudget();
 };

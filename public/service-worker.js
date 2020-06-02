@@ -74,6 +74,25 @@ self.addEventListener("fetch", function(evt) {
   );
 });
 
+// clear cache
+self.addEventListener("fetch", function(evt) {
+  if (evt.request.url.includes("/api/transaction") && evt.request.method === "DELETE") {
+    evt.respondWith(
+      caches.open(DATA_CACHE_NAME).then(cache => {
+        return fetch(evt.request)
+          .then(response => {
+            if (response.status === 200) {
+              cache = {};
+            }
+
+            return response;
+          })
+      }).catch(err => console.log(err))
+    );
+    return;
+  }
+});
+
 //post transactions when back online
 self.addEventListener('sync', function(evt) {
   if (evt.tag === "post-offline-transactions") {
