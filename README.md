@@ -30,13 +30,14 @@ Deployed to Heroku: https://budget-progressive-web-app.herokuapp.com/
   * Offline entries are added to tracker database
 
 
-
 ## Technologies
 
 ### FrontEnd
 
 * Chart.js
-* Bootstrap CSS Frameword
+* Bootstrap CSS Framework
+* HTML
+* JavaScript
 
 ### Backend
 
