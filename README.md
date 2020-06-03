@@ -14,7 +14,7 @@ Deployed to Heroku: https://budget-progressive-web-app.herokuapp.com/
 > SO THAT my account balance is accurate when I am traveling
 
 
-## Functionality
+## Features
 
 ### Offline
 
